@@ -10,9 +10,6 @@ driver = WebDriver()
 # открытие страницы браузера
 driver.get("http://suninjuly.github.io/wait1.html")
 
-# не явное ожидание
-driver.implicitly_wait(5)
-
 # говорим Selenium проверять в течение 5 секунд, пока кнопка не станет кликабельной
 button = WebDriverWait(driver, 5).until(
         EC.element_to_be_clickable((By.ID, "verify"))

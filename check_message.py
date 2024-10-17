@@ -1,5 +1,6 @@
-# проверка сообщения после нажатия кнопки (с неявным ожиданием)
+# проверка сообщения после нажатия кнопки (с не явным ожиданием)
 from selenium.webdriver.chrome.webdriver import WebDriver
+import time
 
 # инициализация браузера
 driver = WebDriver()
@@ -7,7 +8,7 @@ driver = WebDriver()
 # открытие страницы браузера
 driver.get("http://suninjuly.github.io/wait1.html")
 
-# не явное ожидание
+# ожидание
 driver.implicitly_wait(5)
 
 # поиск кнопки
