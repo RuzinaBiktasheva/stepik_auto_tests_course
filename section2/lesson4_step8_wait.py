@@ -1,36 +1,22 @@
 from selenium.webdriver.common.by import By
-from selenium import webdriver
-import math
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-# инициализация браузера
-wd = webdriver.Chrome()
 
-try:
+def test(app):
     # открытие страницы
-    wd.get('http://suninjuly.github.io/explicit_wait2.html')
+    app.helper.open_page('http://suninjuly.github.io/explicit_wait2.html')
     # явное ожидание
-    WebDriverWait(wd, 15).until(
+    WebDriverWait(app.wd, 15).until(
         EC.text_to_be_present_in_element((By.ID, "price"), '$100')
     )
     # нажатие на кнопку Book
-    wd.find_element(By.ID, 'book').click()
-    # считывание значения
-    x = int(wd.find_element(By.ID, 'input_value').text)
+    app.wd.find_element(By.ID, 'book').click()
     # расчет математической функции
-    def calc(x):
-        return str(math.log(abs(12 * math.sin(int(x)))))
+    value = app.helper.calc()
     # введение ответа в текстовое поле
-    value = calc(x)
-    wd.find_element(By.ID, 'answer').send_keys(value)
+    app.wd.find_element(By.ID, 'answer').send_keys(value)
     # нажатие кнопки Submit
-    wd.find_element(By.CSS_SELECTOR, 'button[type="submit"]').click()
+    app.wd.find_element(By.CSS_SELECTOR, 'button[type="submit"]').click()
     # получение кода
-    alert = wd.switch_to.alert
-    alert_text = alert.text[79:]
-    print(alert_text)
-    alert.accept()
-
-finally:
-    wd.quit()
+    app.helper.get_code()
